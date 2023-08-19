@@ -100,5 +100,20 @@ class AdminController extends Controller
         equivalent to $user->roles()->syncWithoutDetaching([$admin->id, $owner->id]);
        */
 
+        // checking assignment
+        /*
+        $user = User::query()->where('name','Owner')->first();
+        echo $user->hasRole('owner');
+
+        $user->hasRole('owner');   // false
+        $user->hasRole('admin');   // true
+        $user->hasPermission('edit-user');   // false
+        $user->isAbleTo('edit-user');   // false
+        $user->hasPermission('create-post'); // true
+        $user->isAbleTo('create-post'); // true
+
+        */
+        $user = User::query()->where('name','Owner')->first();
+        echo $user->ability(['admin'], ['create-post', 'delete-user']);
     }
 }
